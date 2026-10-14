@@ -500,9 +500,9 @@ footer .small{color:#9a8a90;font-size:12.5px;margin-top:14px;max-width:620px;mar
   vids.forEach(function(v){ v.muted=true; });
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ var v=e.target;
-      if(e.isIntersecting){ v.play().catch(function(){}); } else { v.pause(); }
+      if(e.isIntersecting){ try{if(v.preload!=='auto')v.preload='auto';}catch(_){ } v.play().catch(function(){}); } else { v.pause(); }
     });
-  },{threshold:0.25});
+  },{rootMargin:'500px 0px',threshold:0.01});
   vids.forEach(function(v){ io.observe(v); });
 })();
 </script>
