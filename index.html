@@ -259,11 +259,11 @@ footer .small{color:#9a8a90;font-size:12.5px;margin-top:14px;max-width:620px;mar
     <h2 class="sec">Mira esas manos. La semana que viene, son las tuyas.</h2>
     <p class="narrow" style="color:var(--muted);font-weight:600">El hilo deslizando, el punto que cierra, el amigurumi que nace en tu mano. Eso es lo que te espera del otro lado — no es talento, es solo seguir el patrón correcto, vuelta por vuelta.</p>
     <div class="vidwall">
-      <video src="v1.mp4" autoplay muted loop playsinline preload="metadata"></video>
-      <video src="v2.mp4" autoplay muted loop playsinline preload="metadata"></video>
-      <video src="v3.mp4" autoplay muted loop playsinline preload="metadata"></video>
-      <video src="v4.mp4" autoplay muted loop playsinline preload="metadata"></video>
-      <video src="v5.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="v1.mp4" poster="p1.webp" muted loop playsinline preload="none"></video>
+      <video src="v2.mp4" poster="p2.webp" muted loop playsinline preload="none"></video>
+      <video src="v3.mp4" poster="p3.webp" muted loop playsinline preload="none"></video>
+      <video src="v4.mp4" poster="p4.webp" muted loop playsinline preload="none"></video>
+      <video src="v5.mp4" poster="p5.webp" muted loop playsinline preload="none"></video>
     </div>
     <p class="note">Piezas tejidas paso a paso con los patrones de la Bóveda. Del primer punto al muñeco terminado. Tus resultados dependen de tu propia práctica.</p>
     <div style="margin-top:22px"><a class="btn" href="#offer">QUIERO SENTIR ESTO →</a></div>
@@ -492,5 +492,18 @@ footer .small{color:#9a8a90;font-size:12.5px;margin-top:14px;max-width:620px;mar
   </div>
 </footer>
 
+<script>
+(function(){
+  var vids=[].slice.call(document.querySelectorAll('.vidwall video'));
+  if(!vids.length||!('IntersectionObserver' in window)) return;
+  vids.forEach(function(v){ v.muted=true; });
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ var v=e.target;
+      if(e.isIntersecting){ v.play().catch(function(){}); } else { v.pause(); }
+    });
+  },{threshold:0.25});
+  vids.forEach(function(v){ io.observe(v); });
+})();
+</script>
 </body>
 </html>
